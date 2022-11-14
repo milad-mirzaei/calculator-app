@@ -247,6 +247,7 @@ class _CalculatorState extends State<Calculator> {
                                       "0") {
                                     setState(() {
                                       userQuestion += buttons[index];
+                                      equalParsed();
                                     });
                                   }
                                 } else {
