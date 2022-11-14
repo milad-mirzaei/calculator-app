@@ -38,36 +38,39 @@ class _CalculatorState extends State<Calculator> {
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       body: Column(
         children: [
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Container(
               color: Colors.grey.shade300,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    padding:const EdgeInsets.only(left: 17),
+                    padding: EdgeInsets.only(left: w / 22),
                     alignment: Alignment.centerLeft,
                     child: Text(
                       userQuestion,
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Colors.grey,
-                          fontSize: 40,
+                          fontSize: w / 13,
                           fontWeight: FontWeight.w500),
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.only(right: 17),
+                    padding: EdgeInsets.only(right: w / 22),
                     alignment: Alignment.centerRight,
                     child: Text(
                       userAnswer,
                       style: TextStyle(
                           color: Colors.grey.shade600,
-                          fontSize: 57,
+                          fontSize: w / 9,
                           fontWeight: FontWeight.w500),
                     ),
                   )
@@ -76,7 +79,7 @@ class _CalculatorState extends State<Calculator> {
             ),
           ),
           Expanded(
-            flex: 5,
+            flex: h < 900 ? 5 : 7,
             child: Container(
                 decoration: BoxDecoration(
                     color: Colors.grey.shade100,
@@ -87,11 +90,11 @@ class _CalculatorState extends State<Calculator> {
                           blurRadius: 25,
                           spreadRadius: 3)
                     ],
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(44),
-                        topRight: Radius.circular(44))),
-                margin: const EdgeInsets.only(top: 10),
-                padding: const EdgeInsets.symmetric(horizontal: 17),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(w / 9),
+                        topRight: Radius.circular(w / 9))),
+                margin: EdgeInsets.only(top: w / 33),
+                padding: EdgeInsets.symmetric(horizontal: w / 25),
                 child: GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -130,7 +133,6 @@ class _CalculatorState extends State<Calculator> {
                                   });
                                 }
                               }
-
                             });
                       } else if (index == buttons.length - 1) {
                         return Button(

@@ -18,14 +18,17 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: buttonTapped,
       child: Padding(
-        padding: const EdgeInsets.all(7.0),
+        padding: EdgeInsets.all(w / 75),
         child: Container(
-          margin: const EdgeInsets.all(7),
+          alignment: Alignment.center,
+          margin: EdgeInsets.all(w / 75),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40),
+              borderRadius: BorderRadius.circular(w / 16),
               color: color,
               border: Border.all(color: Colors.white, width: 2),
               boxShadow: [
@@ -39,7 +42,9 @@ class Button extends StatelessWidget {
             child: Text(
               btn,
               style: TextStyle(
-                  color: txtColor, fontSize: 33, fontWeight: FontWeight.w500),
+                  color: txtColor,
+                  fontSize: w / 17,
+                  fontWeight: FontWeight.w500),
             ),
           ),
         ),
