@@ -36,10 +36,27 @@ class _CalculatorState extends State<Calculator> {
     "="
   ];
 
+  bool allowDot = true;
+
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+
+    if (userQuestion.isNotEmpty) {
+      for (var i = 0; i < userQuestion.length; i++) {
+        if (userQuestion[i] == ".") {
+          allowDot = false;
+        }
+        if (userQuestion[i] == "/" ||
+            userQuestion[i] == "%" ||
+            userQuestion[i] == "x" ||
+            userQuestion[i] == "-" ||
+            userQuestion[i] == "+") {
+          allowDot = true;
+        }
+      }
+    }
 
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
@@ -109,6 +126,7 @@ class _CalculatorState extends State<Calculator> {
                             shadowColor: colorPick(index, true),
                             buttonTapped: () {
                               clear();
+                              allowDot = true;
                             });
                       } else if (index == 1) {
                         return Button(
@@ -120,6 +138,7 @@ class _CalculatorState extends State<Calculator> {
                               if (userQuestion.isNotEmpty) {
                                 if (userQuestion.length == 1) {
                                   clear();
+                                  allowDot = true;
                                 } else {
                                   setState(() {
                                     userQuestion = userQuestion.substring(
@@ -161,7 +180,7 @@ class _CalculatorState extends State<Calculator> {
                             shadowColor: colorPick(index, true),
                             buttonTapped: () {
                               if (userQuestion.isNotEmpty) {
-                                bool isDouble = userQuestion.contains(".");
+                                bool isDouble = !allowDot;
                                 if (!isDouble) {
                                   if (isOprator(
                                       userQuestion[userQuestion.length - 1])) {
