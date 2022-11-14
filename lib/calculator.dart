@@ -58,6 +58,20 @@ class _CalculatorState extends State<Calculator> {
       }
     }
 
+    if (userQuestion.length >= 2) {
+      if (userQuestion[0] == "0" &&
+          userQuestion[1] != "." &&
+          userQuestion[1] != "/" &&
+          userQuestion[1] != "%" &&
+          userQuestion[1] != "x" &&
+          userQuestion[1] != "-" &&
+          userQuestion[1] != "+") {
+        setState(() {
+          userQuestion = userQuestion.substring(1, userQuestion.length);
+        });
+      }
+    }
+
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       body: Column(
@@ -238,6 +252,7 @@ class _CalculatorState extends State<Calculator> {
                                 } else {
                                   setState(() {
                                     userQuestion += buttons[index];
+                                    equalParsed();
                                   });
                                 }
                               } else {
